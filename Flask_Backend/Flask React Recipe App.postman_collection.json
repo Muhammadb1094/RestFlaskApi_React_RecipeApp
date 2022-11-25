@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "60ff9d8a-7ba6-4c5f-8dd7-f35065643a8e",
+		"name": "Flask React Recipe App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16553227"
+	},
+	"item": [
+		{
+			"name": "Create Recipe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 6,\r\n    \"name\":\"Test updated\",\r\n    \"ingredients\":\"Water, Milk\",\r\n    \"instructions\":\"Mix upto 2 minutes\",\r\n    \"serving_size\":0.2212,\r\n    \"category\": \"Sweet lunch\",\r\n    \"notes\": \"Try to make\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/create-recipe/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"create-recipe",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"email\",\r\n    \"password\":\"password\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/signup/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all recipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/get_all_recipes/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"get_all_recipes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete recipe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/delete-recipe/6/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"delete-recipe",
+						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
