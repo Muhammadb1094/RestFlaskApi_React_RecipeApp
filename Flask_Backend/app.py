@@ -1,23 +1,14 @@
-from flask import Flask, request, jsonify, current_app
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 import os
 from flask_migrate import Migrate
-from flask_restx import Resource, Namespace, fields
-from flask import request
 from werkzeug.security import generate_password_hash, check_password_hash
 from http import HTTPStatus
-from flask_jwt_extended import (create_access_token,
-                                create_refresh_token, jwt_required, get_jwt_identity)
-from werkzeug.exceptions import Conflict, BadRequest
-
-auth_namespace = Namespace('auth', description="a namespace for authentication")
+import jwt
+from werkzeug.exceptions import BadRequest
 
 app = Flask(__name__)
-
-with app.app_context():
-    # within this block, current_app points to app.
-    print(current_app.name)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -35,6 +26,7 @@ class User(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(80), nullable=False, unique=True)
     password_hash = db.Column(db.Text(), nullable=False)
+    access_token = db.Column(db.Text(), nullable=True)
 
     def __repr__(self):
         return f"<User {self.id} {self.email}>"
@@ -42,6 +34,7 @@ class User(db.Model):
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(100))
     ingredients = db.Column(db.Text)
     instructions = db.Column(db.Text)
@@ -60,28 +53,47 @@ class RecipeSchema(SQLAlchemyAutoSchema):
         model = Recipe
         include_relationships = True
         load_instance = True
+        include_fk = True
 
 
 @app.route('/get_all_recipes/')
 def get_all_recipes():
-    recipes = Recipe.query.all()
-    ser = RecipeSchema()
-    data = ser.dump(recipes, many=True)
-    return jsonify(data)
+    if 'Authorization' in request.headers:
+        token = request.headers['Authorization']
+        user = User.query.filter_by(access_token=token).first()
+        if user:
+            recipes = Recipe.query.filter_by(user=user.id)
+            ser = RecipeSchema()
+            data = ser.dump(recipes, many=True)
+            return jsonify(data)
+
+        else:
+            raise BadRequest("Invalid Token")
+    else:
+        raise BadRequest("Authorization were not provided")
 
 
 @app.route('/create-recipe/', methods=['POST'])
-def create_():
+def create_recipe():
     if request.method == 'POST':
-        request_data = request.get_json()
-        session = db.session()
-        schema = RecipeSchema()
-        load_data = schema.load(request_data, session=session)
-        session.add(load_data)
-        session.commit()
-        session.close()
-        return jsonify({"result": "created Successfully"})
 
+        if 'Authorization' in request.headers:
+            token = request.headers['Authorization']
+            user = User.query.filter_by(access_token=token).first()
+            if user:
+                request_data = request.get_json()
+                request_data.update({"user": int(user.id)})
+                session = db.session()
+                schema = RecipeSchema()
+                load_data = schema.load(request_data, session=session)
+                session.add(load_data)
+                session.commit()
+                session.close()
+                return jsonify({"result": "created Successfully"})
+            else:
+                raise BadRequest("Invalid Token")
+        else:
+            raise BadRequest("Authorization were not provided")
 
 @app.route('/delete-recipe/<id>/')
 def delete(id):
@@ -95,7 +107,7 @@ def delete(id):
 
 
 @app.route('/signup/', methods=['POST'])
-def post():
+def signup():
     """
         Create a new user account
     """
@@ -119,31 +131,32 @@ def post():
         return jsonify({"result": "Email Already exists"})
 
 
-#     def post(self):
-#         """
-#             Generate a JWT
-#
-#         """
-#
-#         data = request.get_json()
-#
-#         email = data.get('email')
-#         password = data.get('password')
-#
-#         user = User.query.filter_by(email=email).first()
-#
-#         if (user is not None) and check_password_hash(user.password_hash, password):
-#             access_token = create_access_token(identity=user.username)
-#             refresh_token = create_refresh_token(identity=user.username)
-#
-#             response = {
-#                 'acccess_token': access_token,
-#                 'refresh_token': refresh_token
-#             }
-#
-#             return response, HTTPStatus.OK
-#
-#         raise BadRequest("Invalid Username or password")
+@app.route('/signin/', methods=['POST'])
+def signin():
+    """
+        Generate a JWT
+    """
+
+    data = request.get_json()
+
+    email = data.get('email')
+    password = data.get('password')
+
+    user = User.query.filter_by(email=email).first()
+
+    if (user is not None) and check_password_hash(user.password_hash, password):
+
+        access_token = jwt.encode({"email": user.email}, "secret", algorithm="HS256")
+
+        response = {
+            'acccess_token': access_token,
+        }
+        user.access_token = access_token
+        # db.session()
+        db.session.commit()
+        return response, HTTPStatus.OK
+
+    raise BadRequest("Invalid Username or password")
 
 
 if __name__ == "__main__":

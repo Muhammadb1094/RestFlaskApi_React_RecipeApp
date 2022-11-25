@@ -1,19 +1,25 @@
 {
 	"info": {
-		"_postman_id": "60ff9d8a-7ba6-4c5f-8dd7-f35065643a8e",
+		"_postman_id": "a87fc144-d3c2-44bd-9131-010436c52517",
 		"name": "Flask React Recipe App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16553227"
+		"_exporter_id": "21291862"
 	},
 	"item": [
 		{
 			"name": "Create Recipe",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsMkBnbWFpbC5jb20ifQ.KxQvBNd5iox8O2dhA6V1vFSiw1i7AlLMdix_4ZS3Qt8",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 6,\r\n    \"name\":\"Test updated\",\r\n    \"ingredients\":\"Water, Milk\",\r\n    \"instructions\":\"Mix upto 2 minutes\",\r\n    \"serving_size\":0.2212,\r\n    \"category\": \"Sweet lunch\",\r\n    \"notes\": \"Try to make\"\r\n}\r\n",
+					"raw": "{\r\n\r\n    \"name\":\"Test 2\",\r\n    \"ingredients\":\"Water, Milk\",\r\n    \"instructions\":\"Mix upto 2 minutes\",\r\n    \"serving_size\":0.2212,\r\n    \"category\": \"Sweet lunch\",\r\n    \"notes\": \"Try to make\",\r\n    \"user\":1\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -45,7 +51,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"email\",\r\n    \"password\":\"password\"\r\n}\r\n",
+					"raw": "{\r\n    \"email\":\"email2@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"access_token\": null\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,7 +80,13 @@
 			"name": "get all recipes",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsMkBnbWFpbC5jb20ifQ.KxQvBNd5iox8O2dhA6V1vFSiw1i7AlLMdix_4ZS3Qt8",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://127.0.0.1:5000/get_all_recipes/",
 					"protocol": "http",
@@ -99,7 +111,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/delete-recipe/6/",
+					"raw": "http://127.0.0.1:5000/delete-recipe/8/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -110,7 +122,39 @@
 					"port": "5000",
 					"path": [
 						"delete-recipe",
-						"6",
+						"8",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"email2@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/signin/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"signin",
 						""
 					]
 				}
