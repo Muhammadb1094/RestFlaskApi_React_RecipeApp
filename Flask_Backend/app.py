@@ -7,9 +7,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from http import HTTPStatus
 import jwt
 from werkzeug.exceptions import BadRequest
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-
+CORS(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'recipe_database.db')
@@ -76,9 +77,10 @@ def get_all_recipes():
 @app.route('/create-recipe/', methods=['POST'])
 def create_recipe():
     if request.method == 'POST':
-
+        print(request.headers)
         if 'Authorization' in request.headers:
             token = request.headers['Authorization']
+            
             user = User.query.filter_by(access_token=token).first()
             if user:
                 request_data = request.get_json()

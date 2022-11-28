@@ -1,0 +1,283 @@
+.login-body {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  /* background-color: black; */
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0),
+    rgb(230, 89, 89)
+  );
+}
+.card-cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: black; */
+}
+.landing-body {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  overflow: scroll;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  /* background-color: black; */
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0),
+    rgb(230, 89, 89)
+  );
+}
+.landing-card-cover {
+  padding: 20px;
+}
+.landing-card {
+  background-color: white;
+}
+.login-card {
+  background-color: white;
+  border-radius: 70px 5px 30px 5px;
+  overflow: hidden;
+  width: 400px;
+  height: 400px;
+}
+.Signup-card {
+  background-color: white;
+  border-radius: 70px 5px 30px 5px;
+  overflow: hidden;
+  width: 400px;
+  height: 500px;
+}
+.head-title {
+  width: 350px;
+  padding-top: 40px;
+}
+.head-title h2 {
+  font-size: 32px;
+  font-family: "Lato", sans-serif;
+  color: black;
+  font-weight: bold;
+  border-left: 5px solid red;
+  padding-left: 5px;
+  border-radius: 5px;
+
+  /* width: 75px; */
+  /* margin: auto; */
+}
+
+.logo {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.logo img {
+  position: absolute;
+  top: 0px;
+  left: 240px;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+.card-label-email label {
+  padding-top: 20px;
+  padding-bottom: 5px;
+  color: black;
+  font-size: 16px;
+}
+.card-label-password label {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  color: black;
+  font-size: 16px;
+}
+.card-error {
+  color: red;
+  font-size: 12px;
+  padding-top: 5px;
+}
+.card-button button {
+  background-color: #f76154;
+  border: 0;
+  border-radius: 20px;
+  color: white;
+  padding: 5px 10px;
+  font-size: 16px;
+  width: 150px;
+  margin: auto;
+}
+.card-button {
+  padding: 10px;
+  width: 350px;
+  text-align: center;
+}
+.card-button-recipe button {
+  background-color: #f76154;
+  border: 0;
+  border-radius: 20px;
+  color: white;
+  padding: 5px 10px;
+  font-size: 16px;
+  width: 150px;
+  margin: auto;
+}
+.card-button-recipe {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  margin: 30px 0;
+}
+.card-input-email {
+  width: 240px;
+  padding: 5px 10px;
+  border: 1px solid #f76154;
+}
+.card-input-password {
+  width: 350px;
+  padding: 5px 10px;
+  border: 1px solid #f76154;
+}
+.card-input-recipe {
+  width: 80%;
+  padding: 5px 10px;
+  border: 1px solid #f76154;
+}
+.card-input-password:focus {
+  border: 1px solid #1976f2;
+  box-shadow: 0 0 0 2px #e7f3ff;
+  outline: none !important;
+}
+.card-input-email:focus {
+  border: 1px solid #1976f2;
+  box-shadow: 0 0 0 2px #e7f3ff;
+  outline: none !important;
+}
+.eye-lash {
+  color: black;
+  font-weight: bold;
+  position: relative;
+  top: 0px;
+  right: 25px;
+  cursor: pointer;
+}
+.signup-link {
+  text-align: center;
+}
+.signup-link p {
+  color: black;
+  font-size: 14px;
+}
+.signup-link span {
+  color: #f76154;
+  font-size: 16px;
+}
+.main-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.main-base {
+  background-color: #eaedf4;
+}
+.main-top {
+  background-color: #eaedf4;
+}
+.main-text {
+  background-color: #eaedf4;
+  width: 100%;
+  height: 100%;
+}
+.main-title {
+  padding: 100px 0 0 50px;
+}
+.main-title h2 {
+  font-size: 40px;
+  border-left: 5px solid purple;
+  padding-left: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+}
+.main-desp {
+  padding: 20px 50px 0 50px;
+}
+.main-desp span {
+  font-weight: bold;
+  padding-left: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+}
+.main-desp p {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+}
+.main-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 80%;
+  margin: 50px 50px;
+}
+
+.main-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.main-container {
+  padding: 20px;
+}
+
+.main-input input {
+  width: 98%;
+  border-color: #76839c;
+}
+.main-button button {
+  width: 100%;
+  border: none;
+  background-color: #76839c;
+  padding: 3px;
+  color: white;
+  font-size: 16px;
+}
+.main-button button:hover {
+  background-color: purple;
+}
+.count-inner{
+    text-align: center;
+}
+.count-inner p{
+    color: purple;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 24px;
+}
+.count-inner label{
+    color: #76839c;
+    margin: 0;
+    padding: 0;
+}
+.main-tab{
+    width: 100%;
+    padding: 30px;
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 0, 0, 0),
+        rgb(118,131,156)
+      );
+    /* background-color: #97a5be; */
+}
+.card-tab{
+    background-color: white;
+}
